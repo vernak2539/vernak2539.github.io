@@ -1,0 +1,41 @@
+p, h4 {
+	word-wrap: break-word;
+}
+
+.container {
+	margin-top: 30px;
+}
+.container > .row-fluid {
+	margin-bottom:30px;
+}
+.container > .row-fluid > .span3 {
+	min-height:200px;
+	position: relative;
+	border: 1px solid #cfcfcf;
+	box-shadow: 1px 1px 2px 0 rgba(0, 0, 0, .3);
+	border-radius: 5px;
+	padding: 0 12px;
+	-webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+	   -moz-box-sizing: border-box; /* Firefox, other Gecko */
+	             box-sizing: border-box; /* Opera/IE 8+ */
+}
+.container > .row-fluid > .span3 > a.btn {
+	position: absolute;
+	bottom:10px;
+}
+
+@media (max-width: 767px) {
+	.container > .row-fluid > .span3 {
+		min-height:0;
+		position: relative;
+		margin-bottom: 20px;
+	}
+	.container > .row-fluid > .span3:last-child {
+		margin-bottom:0;
+	}
+	.container > .row-fluid > .span3 > a.btn {
+		position: relative;
+		bottom:0;
+		margin-bottom:10px;
+	}
+}

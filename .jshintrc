@@ -1,0 +1,24 @@
+{
+	"globals": {
+		"module": true
+		, "define": true
+		, "require": true
+		, "$": true
+		, "jQuery": true
+		, "_": true
+		, "Backbone": true
+		, "Fuel": true
+	}
+	, "devel":true
+	, "browser": true
+	, "bitwise": true
+	, "curly": true
+	, "debug": false
+	, "eqeqeq": true
+	, "latedef": true
+	, "laxcomma": true
+	, "undef": true
+	, "shadow": false
+	, "strict": true
+	, "unused": true 
+}

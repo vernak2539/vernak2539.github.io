@@ -1,0 +1,26 @@
+define(
+	[
+		'models/project'
+		, 'jquery'
+		, 'lodash'
+		, 'backbone'
+	], function( pModel ) {
+		"use strict";
+		var ProjectModel = Backbone.Collection.extend({
+			model: pModel
+			, initialize: function() {
+			}
+			, url: function() {
+				//return "https://api.github.com/users/vernak2539/repos";
+				return 'js/test.json';
+			}
+			, parse: function(data) {
+				// only allowing non-forked repos
+				return _.filter( data, function( item ) {
+					return item.fork !== true;
+				});
+			}
+		});
+		return ProjectModel;
+	}
+);
