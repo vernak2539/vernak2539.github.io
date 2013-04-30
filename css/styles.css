@@ -17,7 +17,7 @@ p, h4 {
 	padding: 0 12px;
 	-webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
 	   -moz-box-sizing: border-box; /* Firefox, other Gecko */
-	             box-sizing: border-box; /* Opera/IE 8+ */
+	        box-sizing: border-box; /* Opera/IE 8+ */
 }
 .container > .row-fluid > .span3 > a.btn {
 	position: absolute;
