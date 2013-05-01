@@ -11,7 +11,8 @@ define(
 			, initialize: function() {
 			}
 			, url: function() {
-				return "https://api.github.com/users/vernak2539/repos";
+				return './js/test.json';
+				//return "https://api.github.com/users/vernak2539/repos";
 			}
 			, parse: function(data) {
 				// only allowing non-forked repos

@@ -13,17 +13,25 @@ define(
 		"use strict";
 		var ProjectsView = Backbone.View.extend({
 			initialize: function() {
-				this.createDesc();
+				this.createInitialAttributes();
+				this.listenTo(this.model, 'change', this.createInitialAttributes );
 			}
 			, render: function() {
 				return Mustache.render( ProjectTmpl, this.model );
 			}
-			, createDesc: function() {
+			, createInitialAttributes: function() {
+				this.createShortDesc();
+				this.createTitle();
+			}
+			, createShortDesc: function() {
 				if( this.model.get('description').length > 100 ) {
 					this.model.set('descriptionShort', this.model.get('description').substring(0, 100) + '...' );
 				} else {
 					this.model.set('descriptionShort', this.model.get('description') );
 				}
+			}
+			, createTitle: function() {
+				this.model.set( 'title', this.model.get('name').replace(/-/g, ' ') );
 			}
 		});
 		return ProjectsView;
