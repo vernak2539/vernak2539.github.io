@@ -13,6 +13,7 @@ define(
 		"use strict";
 		var ProjectsView = Backbone.View.extend({
 			initialize: function() {
+				this.createInitialAttributes();
 				this.listenTo(this.model, 'change', this.createInitialAttributes );
 			}
 			, render: function() {
@@ -30,7 +31,7 @@ define(
 				}
 			}
 			, createTitle: function() {
-				this.mode.set( 'title', this.model.get('name').replace('-', ' ') );
+				this.model.set( 'title', this.model.get('name').replace(/-/g, ' ') );
 			}
 		});
 		return ProjectsView;
