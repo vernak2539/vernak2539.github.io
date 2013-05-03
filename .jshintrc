@@ -7,7 +7,6 @@
 		, "jQuery": true
 		, "_": true
 		, "Backbone": true
-		, "Fuel": true
 	}
 	, "devel":true
 	, "browser": true

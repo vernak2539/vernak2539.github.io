@@ -1,4 +1,3 @@
-"use strict";
 require.config({
 	paths: {
 		jquery: [
@@ -30,4 +29,6 @@ require.config({
 });
 
 // loading app. set up this way because it was going to use a router
-require([ 'app' ], function( ) {});
+require([ 'app' ], function( ) {
+	"use strict";
+});

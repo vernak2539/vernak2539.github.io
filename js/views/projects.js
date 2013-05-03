@@ -40,7 +40,7 @@ define(
 				//$(this.el).append( view.render() );
 			}
 			, createRow: function( appendThis ) {
-				var row = $('<div/>', { class: 'row-fluid' });
+				var row = $('<div/>', { 'class': 'row-fluid' });
 				return row.append( appendThis );
 			}
 		});
