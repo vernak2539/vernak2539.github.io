@@ -1,0 +1,11 @@
+
+js/main.js
+----------------
+js/models/project.js
+js/collections/projects.js
+text!templates/project.html
+js/views/project.js
+text!templates/bio.html
+js/views/projects.js
+js/app.js
+js/main.js

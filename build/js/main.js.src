@@ -1,0 +1,182 @@
+
+define('models/project',
+	[
+		'jquery'
+		, 'lodash'
+		, 'backbone'
+	], function() {
+		
+		var projectModel = Backbone.Model.extend({
+			defaults: {}
+			, initialize: function() {}
+		});
+		return projectModel;
+	}
+);
+define('collections/projects',
+	[
+		'models/project'
+		, 'jquery'
+		, 'lodash'
+		, 'backbone'
+	], function( pModel ) {
+		
+		var ProjectModel = Backbone.Collection.extend({
+			model: pModel
+			, initialize: function() {
+			}
+			, url: function() {
+				return "https://api.github.com/users/vernak2539/repos";
+			}
+			, parse: function(data) {
+				// only allowing non-forked repos
+				return _.filter( data, function( item ) {
+					return item.fork !== true;
+				});
+			}
+		});
+		return ProjectModel;
+	}
+);
+define('text!templates/project.html',[],function () { return '{{#attributes}}\n<div class="span3">\n\t<h4>{{title}}</h4>\n\t<p>{{descriptionShort}}</p>\n\t<a class="btn btn-info" href="{{html_url}}">more info</a>\n</div>\n{{/attributes}}';});
+
+define('views/project',
+	[
+		'text!templates/project.html'
+		, 'mustache'
+		, 'jquery'
+		, 'lodash'
+		, 'backbone'
+
+	], function(
+		ProjectTmpl
+		, Mustache
+	) {
+		
+		var ProjectsView = Backbone.View.extend({
+			initialize: function() {
+				this.createInitialAttributes();
+				this.listenTo(this.model, 'change', this.createInitialAttributes );
+			}
+			, render: function() {
+				return Mustache.render( ProjectTmpl, this.model );
+			}
+			, createInitialAttributes: function() {
+				this.createShortDesc();
+				this.createTitle();
+			}
+			, createShortDesc: function() {
+				if( this.model.get('description').length > 100 ) {
+					this.model.set('descriptionShort', this.model.get('description').substring(0, 100) + '...' );
+				} else {
+					this.model.set('descriptionShort', this.model.get('description') );
+				}
+			}
+			, createTitle: function() {
+				this.model.set( 'title', this.model.get('name').replace(/-/g, ' ') );
+			}
+		});
+		return ProjectsView;
+	}
+);
+
+define('text!templates/bio.html',[],function () { return '<div class="span3">\n\t<div class="logo"></div>\n\t<p style="text-align:center">My Github Homepage</p>\n</div>\n';});
+
+define('views/projects',
+	[
+		'collections/projects'
+		, 'views/project'
+		, 'text!templates/bio.html'
+		, 'jquery'
+		, 'lodash'
+		, 'backbone'
+
+	], function(
+		ProjectCollection
+		, ProjectView
+		, BioTmpl
+	) {
+		
+		var ProjectsView = Backbone.View.extend({
+			collection: new ProjectCollection()
+			, el: '.container'
+			, count: 0
+			, initialize: function() {
+				this.renderBio();
+				this.listenTo(this.collection, 'add', this.renderOne );
+				this.collection.fetch();
+			}
+			, render: function() {}
+			, renderBio: function() {
+				$(this.el).append( this.createRow( BioTmpl ) );
+				this.count = 1;
+			}
+			, renderOne: function( project ) {
+				var view = new ProjectView( { model: project } );
+				if( this.count < 4 ) {
+					$(this.el).find('.row-fluid:last').append( view.render() );
+					this.count++;
+				} else {
+					$( this.el ).append( this.createRow( view.render() ) );
+					this.count = 0;
+				}
+				//
+				//$(this.el).append( view.render() );
+			}
+			, createRow: function( appendThis ) {
+				var row = $('<div/>', { 'class': 'row-fluid' });
+				return row.append( appendThis );
+			}
+		});
+		return ProjectsView;
+	}
+);
+
+define('app',
+	[
+		'views/projects'
+		, 'jquery'
+		, 'lodash'
+		, 'backbone'
+	], function( ProjectsView ) {
+		
+		new ProjectsView();
+	}
+);
+
+require.config({
+	paths: {
+		jquery: [
+			'https://cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min'
+			, '../../libs/jquery/jquery-min' 
+		]
+		, lodash: [
+			'https://cdnjs.cloudflare.com/ajax/libs/lodash.js/1.2.0/lodash.min'
+			, '../../libs/lodash/lodash-min'
+		]
+		, backbone: [
+			'https://cdnjs.cloudflare.com/ajax/libs/backbone.js/1.0.0/backbone-min'
+			, '../../libs/backbone/backbone-min'
+		]
+		, mustache: [
+			'https://cdnjs.cloudflare.com/ajax/libs/mustache.js/0.7.2/mustache.min'
+			, '../../libs/mustach/mustache-min'
+		]
+	}
+	, shim: {
+		'lodash': {
+			exports: '_'
+		}
+		, 'backbone': {
+			deps: ['lodash', 'jquery']
+			, exports: 'Backbone'
+		}
+	}
+});
+
+// loading app. set up this way because it was going to use a router
+require([ 'app' ], function( ) {
+	
+});
+
+define("js/main", function(){});
