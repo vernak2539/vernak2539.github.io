@@ -14,27 +14,25 @@ module.exports = function(grunt) {
 		jshint: {
 			all: [
 				'Gruntfile.js'
-				, 'js/app.js'
-				, 'js/main.js'
-				, 'js/collections/*.js'
-				, 'js/models/*.js'
-				, 'js/views/*.js'
+				, 'app/js/app.js'
+				, 'app/js/main.js'
+				, 'app/js/collections/*.js'
+				, 'app/js/models/*.js'
+				, 'app/js/views/*.js'
 			]
 			, options: { jshintrc: '.jshintrc' }
 		}
 		, requirejs: {
 			combine: {
 				options: {
-					appDir: './'
+					appDir: './app/'
 					, baseUrl: "./"
 					, dir: 'build/'
-					//, generateSourceMaps: true
-					//, mainConfigFile: 'js/main.js'
+					, generateSourceMaps: true
 					, optimize: "uglify2"
 					, optimizeCss: "none"
 					, preserveLicenseComments: false
-					, skipDirOptimize: false
-					, stubModules: ['text' ]
+					, stubModules: [ 'text' ]
 					, paths: {
 						'jquery': 'empty:'
 						, 'lodash': 'empty:'
@@ -45,7 +43,7 @@ module.exports = function(grunt) {
 						, 'views': 'js/views'
 						, 'models': 'js/models'
 						, 'collections': 'js/collections'
-						, 'templates': 'js/templates'
+						, 'templates': 'templates'
 					}
 					, modules:[
 						{
