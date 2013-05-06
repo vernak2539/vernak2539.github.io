@@ -54,9 +54,11 @@ module.exports = function(grunt) {
 				}
 			}
 		}
-		, copyIndex: {
-			src: ['./app/index.html']
-			, dest: './index.html'
+		, copy: {
+			main: {
+				src: ['./app/index.html']
+				, dest: './index.html'
+			}
 		}
 
 	});
@@ -71,6 +73,6 @@ module.exports = function(grunt) {
 	grunt.registerTask('default', [ 'jshint', 'requirejs' ]);
 
 	// task to build for github page
-	grunt.registerTask('github', ['jshint', 'requirejs', 'copyIndex'] );
+	grunt.registerTask('github', ['jshint', 'requirejs', 'copy:main'] );
 
 };
