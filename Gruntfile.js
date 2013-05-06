@@ -54,15 +54,23 @@ module.exports = function(grunt) {
 				}
 			}
 		}
+		, copyIndex: {
+			src: ['./app/index.html']
+			, dest: './index.html'
+		}
 
 	});
 
 	// These plugins provide necessary tasks.
 	grunt.loadNpmTasks('grunt-contrib-jshint');
 	grunt.loadNpmTasks('grunt-contrib-requirejs');
+	grunt.loadNpmTasks('grunt-contrib-copy');
 
 
 	// Default task.
 	grunt.registerTask('default', [ 'jshint', 'requirejs' ]);
+
+	// task to build for github page
+	grunt.registerTask('github', ['jshint', 'requirejs', 'copyIndex'] );
 
 };
