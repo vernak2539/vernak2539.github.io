@@ -67,11 +67,11 @@ module.exports = function(grunt) {
 				, replacements: [
 					{
 						from: 'href="css/'
-						, to: 'href="app/css/'
+						, to: 'href="build/css/'
 					}
 					, {
 						from: 'data-main="js/'
-						, to: 'data-main="app/js/'
+						, to: 'data-main="build/js/'
 					}
 					, {
 						from: '../'
