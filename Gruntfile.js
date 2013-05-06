@@ -43,7 +43,7 @@ module.exports = function(grunt) {
 						, 'views': 'js/views'
 						, 'models': 'js/models'
 						, 'collections': 'js/collections'
-						, 'templates': 'templates'
+						, 'templates': './templates'
 					}
 					, modules:[
 						{
@@ -63,7 +63,6 @@ module.exports = function(grunt) {
 		, replace: {
 			index: {
 				src: ['./index.html']
-				, dest: './'
 				, overwrite: true
 				, replacements: [
 					{
