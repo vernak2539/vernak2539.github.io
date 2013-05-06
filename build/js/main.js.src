@@ -162,6 +162,7 @@ require.config({
 			'https://cdnjs.cloudflare.com/ajax/libs/mustache.js/0.7.2/mustache.min'
 			, '../../libs/mustach/mustache-min'
 		]
+		, templates: '../templates/'
 	}
 	, shim: {
 		'lodash': {
