@@ -30,7 +30,7 @@ module.exports = function(grunt) {
 					, dir: 'build/'
 					, generateSourceMaps: true
 					, optimize: "uglify2"
-					, optimizeCss: "none"
+					, optimizeCss: "standard"
 					, preserveLicenseComments: false
 					, stubModules: [ 'text' ]
 					, paths: {
