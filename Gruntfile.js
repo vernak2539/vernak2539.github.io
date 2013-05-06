@@ -43,7 +43,7 @@ module.exports = function(grunt) {
 						, 'views': 'js/views'
 						, 'models': 'js/models'
 						, 'collections': 'js/collections'
-						, 'templates': 'templates'
+						, 'templates': './templates'
 					}
 					, modules:[
 						{
@@ -54,15 +54,45 @@ module.exports = function(grunt) {
 				}
 			}
 		}
-
+		, copy: {
+			index: {
+				src: ['./app/index.html']
+				, dest: './index.html'
+			}
+		}
+		, replace: {
+			index: {
+				src: ['./index.html']
+				, overwrite: true
+				, replacements: [
+					{
+						from: 'href="css/'
+						, to: 'href="app/css/'
+					}
+					, {
+						from: 'data-main="js/'
+						, to: 'data-main="app/js/'
+					}
+					, {
+						from: '../'
+						, to: ''
+					}
+				]
+			}
+		}
 	});
 
 	// These plugins provide necessary tasks.
 	grunt.loadNpmTasks('grunt-contrib-jshint');
 	grunt.loadNpmTasks('grunt-contrib-requirejs');
+	grunt.loadNpmTasks('grunt-contrib-copy');
+	grunt.loadNpmTasks('grunt-text-replace');
 
 
 	// Default task.
 	grunt.registerTask('default', [ 'jshint', 'requirejs' ]);
+
+	// task to build for github page
+	grunt.registerTask('github', ['jshint', 'requirejs', 'copy:index', 'replace:index'] );
 
 };
