@@ -28,6 +28,7 @@ define(
 				this.count = 1;
 			}
 			, renderOne: function( project ) {
+				this.checkForEnd();
 				var view = new ProjectView( { model: project } );
 				if( this.count < 4 ) {
 					$(this.el).find('.row-fluid:last').append( view.render() );
@@ -38,6 +39,9 @@ define(
 				}
 				//
 				//$(this.el).append( view.render() );
+			}
+			, checkForEnd: function() {
+				
 			}
 			, createRow: function( appendThis ) {
 				var row = $('<div/>', { 'class': 'row-fluid' });
