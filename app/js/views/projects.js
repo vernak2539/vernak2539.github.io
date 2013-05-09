@@ -18,17 +18,22 @@ define(
 			, el: '.container'
 			, count: 0
 			, initialize: function() {
-				this.renderBio();
-				this.listenTo(this.collection, 'add', this.renderOne );
-				this.collection.fetch();
+				this.collection.fetch({
+					success: _.bind( this.renderAll, this )
+				});
 			}
-			, render: function() {}
+			, renderAll: function() {
+				this.renderBio();
+				this.collection.each( this.renderOne, this );
+				$('.tmp-hide').animate({
+					opacity: 1
+				}, 500);
+			}
 			, renderBio: function() {
 				$(this.el).append( this.createRow( BioTmpl ) );
 				this.count = 1;
 			}
 			, renderOne: function( project ) {
-				this.checkForEnd();
 				var view = new ProjectView( { model: project } );
 				if( this.count < 4 ) {
 					$(this.el).find('.row-fluid:last').append( view.render() );
@@ -37,11 +42,6 @@ define(
 					$( this.el ).append( this.createRow( view.render() ) );
 					this.count = 0;
 				}
-				//
-				//$(this.el).append( view.render() );
-			}
-			, checkForEnd: function() {
-				
 			}
 			, createRow: function( appendThis ) {
 				var row = $('<div/>', { 'class': 'row-fluid' });
