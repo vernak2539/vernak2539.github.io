@@ -1,1 +1,0 @@
-{"version":3,"file":"project.js","sources":["project.js.src"],"names":["define","projectModel","Backbone","Model","extend","defaults","initialize"],"mappings":"AAAAA,QAEE,SACE,SACA,YACA,WAEF,GAAIC,GAAeC,SAASC,MAAMC,QACjCC,YACEC,WAAY,cAEf,OAAOL"}
