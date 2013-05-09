@@ -38,7 +38,7 @@ define('collections/projects',
 		return ProjectModel;
 	}
 );
-define('text!templates/project.html',[],function () { return '{{#attributes}}\n<div class="span3">\n\t<h4>{{title}}</h4>\n\t<p>{{descriptionShort}}</p>\n\t<a class="btn btn-info" href="{{html_url}}">more info</a>\n</div>\n{{/attributes}}';});
+define('text!templates/project.html',[],function () { return '{{#attributes}}\n<div class="span3 tmp-hide">\n\t<h4>{{title}}</h4>\n\t<p>{{descriptionShort}}</p>\n\t<a class="btn btn-info" href="{{html_url}}">more info</a>\n</div>\n{{/attributes}}';});
 
 define('views/project',
 	[
@@ -80,7 +80,7 @@ define('views/project',
 	}
 );
 
-define('text!templates/bio.html',[],function () { return '<div class="span3">\n\t<div class="logo"></div>\n\t<p style="text-align:center">My Github Homepage</p>\n</div>\n';});
+define('text!templates/bio.html',[],function () { return '<div class="span3 tmp-hide">\n\t<div class="logo"></div>\n\t<p style="text-align:center">My Github Homepage</p>\n</div>\n';});
 
 define('views/projects',
 	[
@@ -102,11 +102,17 @@ define('views/projects',
 			, el: '.container'
 			, count: 0
 			, initialize: function() {
-				this.renderBio();
-				this.listenTo(this.collection, 'add', this.renderOne );
-				this.collection.fetch();
+				this.collection.fetch({
+					success: _.bind( this.renderAll, this )
+				});
 			}
-			, render: function() {}
+			, renderAll: function() {
+				this.renderBio();
+				this.collection.each( this.renderOne, this );
+				$('.tmp-hide').animate({
+					opacity: 1
+				}, 500);
+			}
 			, renderBio: function() {
 				$(this.el).append( this.createRow( BioTmpl ) );
 				this.count = 1;
@@ -120,8 +126,6 @@ define('views/projects',
 					$( this.el ).append( this.createRow( view.render() ) );
 					this.count = 0;
 				}
-				//
-				//$(this.el).append( view.render() );
 			}
 			, createRow: function( appendThis ) {
 				var row = $('<div/>', { 'class': 'row-fluid' });
