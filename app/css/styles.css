@@ -33,6 +33,10 @@ p, h4 {
 	margin: 16px auto;
 }
 
+.tmp-hide {
+	opacity:0;
+}
+
 @media (max-width: 767px) {
 	.container > .row-fluid > .span3 {
 		min-height:0;

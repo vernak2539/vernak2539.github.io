@@ -1,2 +1,0 @@
-define(["models/project","jquery","lodash","backbone"],function(e){var n=Backbone.Collection.extend({model:e,initialize:function(){},url:function(){return"https://api.github.com/users/vernak2539/repos"},parse:function(e){return _.filter(e,function(e){return e.fork!==!0})}});return n});
-//@ sourceMappingURL=projects.js.map
