@@ -32,8 +32,6 @@ module.exports = function(grunt) {
 					, optimize: "uglify2"
 					, optimizeCss: "standard"
 					, preserveLicenseComments: false
-					, removeCombined: true
-					, stubModules: [ 'text' ]
 					, paths: {
 						'jquery': 'empty:'
 						, 'lodash': 'empty:'
