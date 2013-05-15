@@ -25,9 +25,11 @@ define(
 			, renderAll: function() {
 				this.renderBio();
 				this.collection.each( this.renderOne, this );
-				$('.tmp-hide').animate({
-					opacity: 1
-				}, 500);
+				$('.loader').fadeOut(function() {
+					$('.tmp-hide').animate({
+						opacity: 1
+					}, 500);
+				});
 			}
 			, renderBio: function() {
 				$(this.el).append( this.createRow( BioTmpl ) );
