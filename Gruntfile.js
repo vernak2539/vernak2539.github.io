@@ -90,7 +90,7 @@ module.exports = function(grunt) {
 					errorsOnly: false, // show pretty file list
 					cyclomatic: 10, // recommendation 10
 					halstead: 12, // no recommendation
-					maintainability: 75 // recommendation 65
+					maintainability: 85 // recommendation 65
 				}
 			}
 		} // end complexity
