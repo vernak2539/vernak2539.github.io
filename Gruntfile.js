@@ -79,6 +79,21 @@ module.exports = function(grunt) {
 				]
 			}
 		}
+		, complexity: {
+			generic: {
+				src: [
+					'app/js/**/*.js'
+					, '!app/js/text.js'
+				],
+				options: {
+					// Recommendations taken from http://jscomplexity.org/complexity
+					errorsOnly: false, // show pretty file list
+					cyclomatic: 10, // recommendation 10
+					halstead: 12, // no recommendation
+					maintainability: 75 // recommendation 65
+				}
+			}
+		} // end complexity
 	});
 
 	// These plugins provide necessary tasks.
@@ -86,12 +101,13 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-requirejs');
 	grunt.loadNpmTasks('grunt-contrib-copy');
 	grunt.loadNpmTasks('grunt-text-replace');
+	grunt.loadNpmTasks('grunt-complexity');
 
 
 	// Default task.
-	grunt.registerTask('default', [ 'jshint', 'requirejs' ]);
+	grunt.registerTask('default', [ 'jshint', 'complexity', 'requirejs' ]);
 
 	// task to build for github page
-	grunt.registerTask('github', ['jshint', 'requirejs', 'copy:index', 'replace:index'] );
+	grunt.registerTask('github', ['default', 'copy:index', 'replace:index'] );
 
 };
