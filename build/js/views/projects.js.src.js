@@ -16,8 +16,8 @@ define(
 		var ProjectsView = Backbone.View.extend({
 			collection: new ProjectCollection()
 			, el: '.container'
-			, count: 0
 			, initialize: function() {
+				this.count = 0;
 				this.collection.fetch({
 					success: _.bind( this.renderAll, this )
 				});
@@ -42,7 +42,7 @@ define(
 					this.count++;
 				} else {
 					$( this.el ).append( this.createRow( view.render() ) );
-					this.count = 0;
+					this.count = 1; // setting to 1 because createrow actually adds a project
 				}
 			}
 			, createRow: function( appendThis ) {
