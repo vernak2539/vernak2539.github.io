@@ -106,7 +106,7 @@ module.exports = function(grunt) {
 
 
 	// Default task.
-	grunt.registerTask('default', [ 'jshint', 'complexity', 'requirejs' ]);
+	grunt.registerTask('default', [ 'jshint', 'complexity'/*, 'requirejs'*/ ]);
 
 	// task to build for github page
 	grunt.registerTask('github', ['default', 'copy:index', 'replace:index'] );
