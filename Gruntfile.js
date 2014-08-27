@@ -32,6 +32,7 @@ module.exports = function(grunt) {
 					, optimize: "uglify2"
 					, optimizeCss: "standard"
 					, preserveLicenseComments: false
+					, logLevel: 0
 					, paths: {
 						'jquery': 'empty:'
 						, 'lodash': 'empty:'
