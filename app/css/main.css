@@ -1,0 +1,30 @@
+body {
+  background: #f5f5f5;
+}
+body .header-container {
+  background: #ffffff;
+}
+body .header-container header {
+  border-bottom: 1px solid #efefef;
+  box-shadow: 0px -3px 10px 1px rgba(127, 127, 127, 0.1);
+}
+body .header-container header > .logo {
+  background: url(../img/main-logo.png) no-repeat;
+  width: 204px;
+  height: 125px;
+  margin: 16px auto;
+}
+body .repos {
+  margin-top: 10px;
+}
+body .repos .repo {
+  padding: 10px;
+}
+body .repos .repo > .content {
+  padding: 10px;
+  border: 1px solid #efefef;
+  background: #ffffff;
+}
+body .repos .repo > .content > h3 {
+  margin-top: 0;
+}
