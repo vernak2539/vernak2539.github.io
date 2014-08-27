@@ -2,21 +2,24 @@ require.config({
 	baseUrl: './'
 	, waitSeconds: 60
 	, paths: {
-		js: 'app/js'
+		app: 'app/js'
+		, views: 'app/js/views'
+		, collections: 'app/js/collections'
+		, models: 'app/js/models'
 		, templates: 'app/templates'
 		, backbone: 'bower_components/backbone/backbone'
-		, underscore: 'bower_components/lodash/lodash'
+		, underscore: 'bower_components/lodash/dist/lodash'
 		, marionette: 'bower_components/marionette/lib/backbone.marionette'
 		, jquery: 'bower_components/jquery/dist/jquery'
 	}
 	, shim: {
-		'lodash': {
+		'underscore': {
 			exports: '_'
 		}
 		, 'backbone': {
-			deps: ['underscore', 'jquery']
+			deps: [ 'underscore', 'jquery' ]
 			, exports: 'Backbone'
 		}
 	}
-	, deps: [ 'js/app' ]
+	, deps: [ 'app/app-start' ]
 });
