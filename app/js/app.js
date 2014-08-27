@@ -5,7 +5,7 @@ define( function( require ) {
 	var Marionette = require( 'marionette' );
 
 	var ProjectGrid        = require( 'views/projects' );
-	var ProjectsCollection = require( 'collections/projects' );
+	var MainModel = require( 'models/main' );
 
 	var app = new Marionette.Application();
 
@@ -14,13 +14,11 @@ define( function( require ) {
 	});
 
 	app.addInitializer( function() {
-		this.model = new Backbone.Model({
-			projects: new ProjectsCollection()
-		});
-	});
+		this.model = new MainModel();
 
-	app.model.fetch().done(function() {
-		app.body.show( new ProjectGrid({ model: app.model }) );
+		app.model.fetch().done(function() {
+			app.body.show( new ProjectGrid({ model: app.model }) );
+		});
 	});
 
 	return app;

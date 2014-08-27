@@ -4,7 +4,6 @@ require.config({
 	, paths: {
 		app: 'app/js'
 		, views: 'app/js/views'
-		, collections: 'app/js/collections'
 		, models: 'app/js/models'
 		, templates: 'app/templates'
 		, backbone: 'bower_components/backbone/backbone'
