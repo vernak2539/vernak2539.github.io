@@ -15,7 +15,7 @@ define( function( require ) {
 			this.options = options || {};
 
 			_.forEach( this.subModels, function( SubModel, key ) {
-				this.set( key, new SubModel( {}, _.assign( this.options[ key ], { parse: true, mainModel: this } ) ) );
+				this.set( key, new SubModel( null, { mainModel: this } ) );
 			}, this );
 		}
 		, fetch: function() {
@@ -27,8 +27,6 @@ define( function( require ) {
 				var model       = this.get( key );
 
 				try {
-					model.initialize({}, _.assign( {}, this.options[ key ], { parse: true, appModel: this } ) );
-
 					model.fetch({
 						success: subDeffered.resolve
 						, error: subDeffered.resolve
