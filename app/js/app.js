@@ -1,24 +1,41 @@
 define( function( require ) {
 	'use strict';
 
-	var Backbone   = require( 'backbone' );
+	var _          = require( 'underscore' );
 	var Marionette = require( 'marionette' );
 
-	var ProjectGrid        = require( 'views/projects' );
-	var MainModel = require( 'models/main' );
+	var ProjectGrid = require( 'views/project-grid' );
+	var MainModel   = require( 'models/main' );
 
 	var app = new Marionette.Application();
 
 	app.addRegions({
-		projects: '.container.repos'
+		projects: '.my-projects'
+		, forks: '.my-forks'
 	});
 
 	app.addInitializer( function() {
 		this.model = new MainModel();
 
-		app.model.fetch().done(function() {
-			app.body.show( new ProjectGrid({ model: app.model }) );
-		});
+		this.model.fetch().done( _.bind( function() {
+			this.projects.show( new ProjectGrid({
+				app: this
+				, filter: { fork: false }
+				, sectionTitle: 'My Repos'
+				, sectionKey: 'projects'
+			}));
+
+			this.forks.show( new ProjectGrid({
+				app: this
+				, filter: { fork: true }
+				, sectionTitle: 'My Forks'
+				, sectionKey: 'forks'
+			}));
+		}, this ) );
+	});
+
+	app.vent.on( 'renderRepos', function( data ) {
+		app[ data ].$el.velocity( 'fadeIn' );
 	});
 
 	return app;

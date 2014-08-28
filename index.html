@@ -9,14 +9,24 @@
 </head>
 <body>
 
-<div class="container-fluid header-container">
+<div class="container-fluid header-container navbar-fixed-top">
 	<div class="row">
-		<header class="col-md-12">
+		<div class="col-md-12">
 			<div class="logo"></div>
-		</header>
+		</div>
 	</div>
 </div>
 
+<div class="fixed-push">
+	<div class="my-projects"></div>
+	<div class="my-forks"></div>
+</div>
+
+<!-- <div class="container">
+	<div class="row">
+		<h1>My Repos</h1>
+	</div>
+</div>
 <div class="container repos">
 	<div class="row">
 		<div class="col-md-3 col-sm-6 repo">
@@ -40,7 +50,35 @@
 			</div>
 		</div>
 	</div>
+</div> -->
+<!--
+<div class="container">
+	<div class="row">
+		<h1>My Forks</h1>
+	</div>
 </div>
+<div class="container forks"></div> -->
+
+<script type="text/template" id="grid-template">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<h1><%= sectionTitle %></h1>
+			</div>
+		</div>
+	</div>
+	<div class="container repos">
+</script>
+
+<script type="text/template" id="row-template">
+	<div class="row"></row>
+</script>
+
+<script type="text/template" id="item-template">
+	<div class="content">
+		<h3><%= name %></h3>
+	</div>
+</script>
 
 <!--
 <div class="loader"></div>
