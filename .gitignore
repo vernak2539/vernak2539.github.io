@@ -3,3 +3,4 @@ test.json
 node_modules/
 bower_components/
 build.txt
+!bower_components/build/requirejs
