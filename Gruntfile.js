@@ -27,8 +27,8 @@ module.exports = function(grunt) {
 					compress: true
 				}
 				, files: {
-					'./build/app/css/main.css': './build/app/css/main.less'
-					, './build/app/css/bootstrap.css': './bower_components/bootstrap-css/css/bootstrap.css'
+					'./build/css/main.css': './build/css/main.less'
+					, './build/css/bootstrap.css': './bower_components/bootstrap-css/css/bootstrap.css'
 				}
 			}
 		}
@@ -42,7 +42,7 @@ module.exports = function(grunt) {
 			combine: {
 				options: {
 					appDir: './'
-					, dir: 'build/'
+					, dir: './build-temp/'
 					, baseUrl: './'
 					, mainConfigFile: './app/js/require-config.js'
 					, optimize: "uglify2"
@@ -52,9 +52,39 @@ module.exports = function(grunt) {
 					, skipDirOptimize: true
 					, logLevel: 0
 					, modules:[
-						{ name: 'app/app-start' }
+						{ name: 'app/require-config' }
 					]
 				}
+			}
+		}
+		, copy: {
+			temp: {
+				files: [
+					{
+						expand: true
+						, cwd: './build-temp/app'
+						, src: ['**']
+						, dest: './build/'
+					}
+				]
+			}
+			, requirejs: {
+				files: [
+					{ expand: false, src: [ './bower_components/requirejs/require.js' ], dest: './build/js/require.js' }
+				]
+			}
+		}
+		, clean: {
+			temp: ['./build-temp']
+			, build: ['./build']
+		}
+		, replace: {
+			distRequireConfig: {
+				src: ['./build/js/require-config.js']
+				, overwrite: true
+				, replacements: [
+					{ from: 'baseUrl: \'./\'', to: 'baseUrl: \'./build/\'' }
+				]
 			}
 		}
 		, complexity: {
@@ -80,7 +110,12 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-complexity');
 	grunt.loadNpmTasks('grunt-contrib-less');
 	grunt.loadNpmTasks('grunt-contrib-watch');
+	grunt.loadNpmTasks('grunt-contrib-clean');
+	grunt.loadNpmTasks('grunt-contrib-copy');
+	grunt.loadNpmTasks('grunt-text-replace');
 
 	// Default task.
-	grunt.registerTask('default', [ 'jshint', 'complexity', 'requirejs', 'less:dist' ]);
+	grunt.registerTask( 'default', [ 'tests', 'optimizejs', 'less:dist' ]);
+	grunt.registerTask( 'tests', [ 'jshint', 'complexity' ] );
+	grunt.registerTask( 'optimizejs', [ 'clean:build', 'requirejs', 'replace:distRequireConfig', 'copy:requirejs', 'copy:temp', 'clean:temp' ] );
 };

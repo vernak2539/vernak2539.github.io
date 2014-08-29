@@ -19,6 +19,6 @@
     "lodash": "~2.4.1",
     "requirejs": "~2.1.14",
     "bootstrap-css": "~3.2.0",
-    "velocity": "~0.11.9"
+    "velocity": "~0.1.0"
   }
 }

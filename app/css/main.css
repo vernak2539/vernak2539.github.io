@@ -27,9 +27,12 @@ body .fixed-push .my-forks .repo {
 }
 body .fixed-push .my-projects .repo > .content,
 body .fixed-push .my-forks .repo > .content {
-  padding: 10px;
+  padding: 3px 15px;
   border: 1px solid #efefef;
+  border-radius: 3px;
   background: #ffffff;
+  box-shadow: 1px 2px 3px -2px #7f7f7f;
+  min-height: 180px;
 }
 body .fixed-push .my-projects .repo > .content > h3,
 body .fixed-push .my-forks .repo > .content > h3 {
