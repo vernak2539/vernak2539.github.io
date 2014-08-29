@@ -5,6 +5,7 @@ require.config({
 		app: 'app/js'
 		, views: 'app/js/views'
 		, models: 'app/js/models'
+		, data: 'app/js/data'
 		, templates: 'app/templates'
 		, backbone: 'bower_components/backbone/backbone'
 		, underscore: 'bower_components/lodash/dist/lodash'
