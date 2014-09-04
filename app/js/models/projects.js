@@ -7,7 +7,7 @@ define( function( require ) {
 	var localRepoData = require( 'data/local-repo-data' );
 
 	return Backbone.Collection.extend({
-		//url: 'app/js/data/temp.json'
+		// url: 'app/js/data/temp.json'
 		url: 'https://api.github.com/users/vernak2539/repos'
 		, parse: function( data ) {
 
